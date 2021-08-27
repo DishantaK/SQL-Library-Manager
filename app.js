@@ -41,20 +41,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//Change to books!!!
+
 app.use('/', indexRouter);
 app.use('/books', bookRouter);
 
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   const err  = new Error()
-//   err.message = 'Page Not Found'
-//   err.status = 404
-//   console.log('404 page not found')
-//   res.render('page-not-found', {err})
+app.use(function(req, res, next) {
+  const err  = new Error()
+  err.message = 'Page Not Found'
+  err.status = 404
+  console.log('404 page not found')
+  res.render('page-not-found', {err})
   
-// });
+});
 
 // error handler
 app.use(function(err, req, res, next) {

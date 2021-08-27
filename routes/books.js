@@ -5,25 +5,25 @@ const Sequelize = require('sequelize')
 
 // - Shows the full list of books 
 
-router.get('/books', function(req, res, next) {
-  res.render(`<h1>Router working 1</h1>`)
+router.get('/', function(req, res, next) {
+  res.render('layout')
   console.log('im here');
 });
 
 //- Shows the create new book form
-router.get('books/new', function (req, res) {
-  //  res.render('new-book');
-  res.send('Router working 2')
+router.get('/new', function (req, res) {
+   res.render('new-book');
+   console.log('Router working 2')
 })
 
 //- Posts a new book to the database
-router.post('books/new', function (req, res) {
+router.post('/new', function (req, res) {
  
 })
 
 //- Shows book detail form
-router.get('/books/:id', function (req, res) {
-  res.send('Router working 3')
+router.get('/:id', function (req, res) {
+  res.send('update-book')
   // Book.findAll({ where: { id: req.params.id } }).then(books => res.json(books));
   // const project = projects[id];
   // res.render('project', {project})
@@ -31,13 +31,13 @@ router.get('/books/:id', function (req, res) {
 })
 
 // - - Updates book info in the database
-router.post('/books/:id', function (req, res) {
+router.post('/:id', function (req, res) {
   // let id = req.params.id;
   //update-book
 })
 
 //- Deletes a book. Careful, this can’t be undone. 
-router.delete('/books/:id/delete', function (req, res) {
+router.delete('/:id/delete', function (req, res) {
   // let id = req.params.id;
 
  
