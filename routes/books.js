@@ -23,7 +23,7 @@ router.post('/new', async function (req, res) {
   res.redirect("/books");
   } catch (error) {
     error.errors.map(e => console.log(e.message))
-    res.send(`<p>${ error.errors.map(e => e.message)}<p>
+    res.send(`${ error.errors.map(e =>  e.message + `<br/ >`)}
     <p> <a class="button" href="/books/new">Retry</a></p>
     `)
     // res.render('new-book')
