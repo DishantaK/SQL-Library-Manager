@@ -3,12 +3,14 @@ head
   title New Book
   link(href='/stylesheets/style.css', rel='stylesheet')
 h1 New Book
-form
+
+
+form(method='POST', action='/books/new')
   p
-    label(for='title') Title
+    label(for='title') Title *
     input#title(name='title', type='text')
   p
-    label(for='author') Author
+    label(for='author') Author *
     input#author(name='author', type='text')
   p
     label(for='genre') Genre
@@ -16,7 +18,9 @@ form
   p
     label(for='year') Year
     input#year(name='year', type='text')
+  p * Indicates a required field
   p
     input(type='submit', value='Create New Book')
   p
     a.button(href='/') Cancel
+
