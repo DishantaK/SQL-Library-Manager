@@ -46,31 +46,12 @@ app.use('/', indexRouter);
 app.use('/books', bookRouter);
 
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err  = new Error()
-  err.message = 'Page Not Found'
-  err.status = 404
-  console.log('404 page not found')
-  res.render('page-not-found', {err})
-  
-});
 
-// error handler that shows on non existient route (confirmed to render multiple times)
-app.use(function(err, req, res, next) {
-
-  res.locals.message = err.message;
-  res.locals.error = err;
-// render the error page
-  res.status(err.status || 500);
-  res.render('error');
-
-  if(res.status == 404){
-    res.render('page-not-found', {err})
-  }
-});
-
-
+//error handler that shows on non existient route (confirmed to render multiple times)
+// app.use(function (err, req, res, next) {
+//   console.error(err.stack)
+//   res.status(500).render('error')
+// })
 
 
 

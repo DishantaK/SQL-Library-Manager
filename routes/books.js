@@ -35,17 +35,28 @@ router.post('/new', async function (req, res) {
 router.get('/:id', async function (req, res) {
   const book = await Book.findByPk(req.params.id);
   res.render("update-book", { book });
-
+  
+  if(book == null) {
+    res.status(404).render('page-not-found.pug');
+  } 
   
 })
 
 // - Updates book info in the database
 router.post('/:id',  async function (req, res) {
-
+try {
   const book = await Book.findByPk(req.params.id);
-  await book.update(req.body);
-  res.redirect("/");
-
+  if(book) {
+    await book.update(req.body);
+    res.redirect("/"); 
+  } 
+} catch (error){
+    error.errors.map(e => console.log(e.message))
+    let book = await Book.build(req.body);
+    res.render("update-book", { book, errors: error.errors, title: "Update Book" })
+    // res.render('new-book')
+  
+}
 })
 
 //- Deletes a book. Careful, this can’t be undone. 
@@ -54,6 +65,8 @@ router.post('/:id/delete', async function (req, res) {
   await book.destroy();
   res.redirect("/");
 })
+
+
 
 
 module.exports = router;
