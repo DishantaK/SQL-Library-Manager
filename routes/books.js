@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 
 router.get('/', async function(req, res) {
   const books =  await Book.findAll();
-  res.render('layout', { books });
+  res.render('index', { books });
 });
 
 //- Shows the create new book form
@@ -23,12 +23,9 @@ router.post('/new', async function (req, res) {
   res.redirect("/books");
   } catch (error) {
     error.errors.map(e => console.log(e.message))
-    res.send(`${ error.errors.map(e =>  e.message + `<br/ >`)}
-    <p> <a class="button" href="/books/new">Retry</a></p>
-    `)
+    let book = await Book.build(req.body);
+    res.render("new-book", { book, errors: error.errors, title: "New Book" })
     // res.render('new-book')
-
-  
   }
   
 })
@@ -38,6 +35,8 @@ router.post('/new', async function (req, res) {
 router.get('/:id', async function (req, res) {
   const book = await Book.findByPk(req.params.id);
   res.render("update-book", { book });
+
+  
 })
 
 // - Updates book info in the database

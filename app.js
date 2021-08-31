@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
   
 });
 
-// error handler taken out because it was forcing an error
+// error handler that shows on non existient route (confirmed to render multiple times)
 app.use(function(err, req, res, next) {
 
   res.locals.message = err.message;
@@ -64,6 +64,10 @@ app.use(function(err, req, res, next) {
 // render the error page
   res.status(err.status || 500);
   res.render('error');
+
+  if(res.status == 404){
+    res.render('page-not-found', {err})
+  }
 });
 
 
