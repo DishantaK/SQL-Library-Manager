@@ -67,6 +67,8 @@ router.post('/:id/delete', async function (req, res) {
 })
 
 
-
+router.get('*', async function(req, res) {
+  res.status(404).render('page-not-found.pug');
+});
 
 module.exports = router;

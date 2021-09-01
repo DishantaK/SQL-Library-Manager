@@ -47,11 +47,12 @@ app.use('/books', bookRouter);
 
 
 
-//error handler that shows on non existient route (confirmed to render multiple times)
-// app.use(function (err, req, res, next) {
-//   console.error(err.stack)
-//   res.status(500).render('error')
-// })
+//error handler 
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.render('page-not-found')
+})
+
 
 
 
