@@ -34,11 +34,12 @@ router.post('/new', async function (req, res) {
 
 router.get('/:id', async function (req, res) {
   const book = await Book.findByPk(req.params.id);
-  res.render("update-book", { book });
-  
-  if(book == null) {
-    res.status(404).render('page-not-found.pug');
-  } 
+  console.log(book === null)
+  if(book === null) {
+    res.status(404).render('page-not-found')
+  } else {
+    res.render("update-book", { book });
+  }
   
 })
 
@@ -68,7 +69,7 @@ router.post('/:id/delete', async function (req, res) {
 
 
 router.get('*', async function(req, res) {
-  res.status(404).render('page-not-found.pug');
+  res.status(404);
 });
 
 module.exports = router;

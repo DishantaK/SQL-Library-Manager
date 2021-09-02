@@ -45,12 +45,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/books', bookRouter);
 
-
+app.use((req, res, next) => {
+	res.render('page-not-found');
+});
 
 //error handler 
 app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.render('page-not-found')
+  res.locals.message = err;
+	res.locals.title = "Server Error";
+	res.render('error');
 })
 
 
